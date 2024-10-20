@@ -60,3 +60,30 @@ PRODUCT_PACKAGES += \
 # Copy patched touch screen driver module
 PRODUCT_COPY_FILES += \
    $(LOCAL_PATH)/touch/tran_touch_patched.ko:recovery/root/lib/modules/tran_touch.ko
+
+# AB
+AB_OTA_UPDATER := true
+
+# A/B
+AB_OTA_PARTITIONS += \
+    preloader \
+    boot \
+    dtbo \
+    product \
+    system \
+    system_ext \
+    vbmeta \
+    vbmeta_system \
+    vbmeta_vendor \
+    vendor \
+    vendor_boot \
+    md1img \
+    spmfw \
+    pi_img \
+    dpm \
+    scp \
+    sspm \
+    mcupm \
+    gz \
+    tee \
+    lk

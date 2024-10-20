@@ -5,9 +5,13 @@ export FOX_AB_DEVICE=1
 export FOX_VIRTUAL_AB_DEVICE=1
 export OF_DEFAULT_KEYMASTER_VERSION=4.1
 export OF_NO_TREBLE_COMPATIBILITY_CHECK=1
-export OF_MAINTAINER="gabutuniverse_pajar!"
+export OF_MAINTAINER="Kychera22"
 export FOX_VARIANT="A13+"
 export OF_FLASHLIGHT_ENABLE=0
+
+export FOX_RECOVERY_SYSTEM_PARTITION="/dev/block/mapper/system"
+export FOX_RECOVERY_VENDOR_PARTITION="/dev/block/mapper/vendor"
+export FOX_VENDOR_BOOT_RECOVERY=1
 
 export FOX_USE_BASH_SHELL=1
 export FOX_USE_NANO_EDITOR=1
@@ -19,7 +23,12 @@ export OF_ENABLE_LPTOOLS=1
 export FOX_DELETE_MAGISK_ADDON=1
 export FOX_DELETE_AROMAFM=1
 export FOX_ENABLE_APP_MANAGER=1
+export FOX_RESET_SETTINGS=1
 export OF_SUPPORT_VBMETA_AVB2_PATCHING=1
+
+export FOX_INSTALLER_DEBUG_MODE=1
+
+
 
 export FOX_USE_DATA_RECOVERY_FOR_SETTINGS=1
 
@@ -48,4 +57,4 @@ fi
 export LC_ALL="C"
 
 # Clone to fix build on minimal manifest
-git clone https://android.googlesource.com/platform/external/gflags/ -b android-12.1.0_r4 external/gflags
+#git clone https://android.googlesource.com/platform/external/gflags/ -b android-12.1.0_r4 external/gflags
