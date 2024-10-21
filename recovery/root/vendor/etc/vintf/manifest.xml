@@ -607,6 +607,16 @@
         </interface>
         <fqname>@1.0::ITui/default</fqname>
     </hal>
+        <hal format="aidl">
+        <name>android.hardware.vibrator</name>
+        <version>2</version>
+        <fqname>IVibrator/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>android.hardware.vibrator</name>
+        <version>2</version>
+        <fqname>IVibratorManager/default</fqname>
+    </hal>
     <sepolicy>
         <version>31.0</version>
     </sepolicy>

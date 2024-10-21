@@ -66,24 +66,18 @@ AB_OTA_UPDATER := true
 
 # A/B
 AB_OTA_PARTITIONS += \
-    preloader \
-    boot \
-    dtbo \
-    product \
     system \
-    system_ext \
-    vbmeta \
-    vbmeta_system \
-    vbmeta_vendor \
     vendor \
-    vendor_boot \
-    md1img \
-    spmfw \
-    pi_img \
-    dpm \
-    scp \
-    sspm \
-    mcupm \
-    gz \
-    tee \
-    lk
+    product \
+    system_ext \
+    vendor_dlkm \
+    odm_dlkm \
+    boot \
+    vbmeta_vendor \
+    vbmeta_system \
+    vendor_boot
+
+
+TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
+    $(TARGET_OUT_SHARED_LIBRARIES)/android.hardware.vibrator-V1-ndk_platform.so
+
