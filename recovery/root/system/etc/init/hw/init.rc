@@ -81,7 +81,13 @@ on boot
 
 on firmware_mounts_complete
     rm /dev/.booting
-
+   #ITD:add flashlight by isp team 20220412 start
+    chown system root /dev/flashlight
+    chmod 0666 /sys/devices/virtual/torch/torch/torch_level
+    chmod 0666 /sys/devices/virtual/sub_torch/sub_torch/sub_torch_level
+    write /sys/devices/virtual/torch/torch/torch_level "0"
+    write /sys/devices/virtual/sub_torch/sub_torch/sub_torch_level "0"
+#ITD:add flashlight by isp team 20220412 end
    # For vibrator
     chown system system /sys/class/leds/vibrator/trigger
     chown system system /sys/class/leds/vibrator/activate

@@ -22,6 +22,7 @@ Medium checks
 Minor checks
 - [x] MTP export
 - [x] reboot to bootloader
+- [x] reboot to fastbootd
 - [x] reboot to recovery
 - [x] poweroff
 - [x] battery level
@@ -31,5 +32,6 @@ Minor checks
 - [x] USB mass storage export
 - [x] set brightness
 - [x] vibrate
+- [x] flashlight
 - [x] screenshot
 - [x] partition SD card
