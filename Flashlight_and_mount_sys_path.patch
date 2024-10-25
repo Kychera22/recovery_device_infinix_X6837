@@ -1,0 +1,126 @@
+diff --git a/gui/action.cpp b/gui/action.cpp
+index a77d6a55..ef6ffcbc 100755
+--- a/gui/action.cpp
++++ b/gui/action.cpp
+@@ -2457,6 +2457,9 @@ int GUIAction::mountsystemtoggle(std::string arg)
+ 	int op_status = 0;
+ 	bool remount_system = PartitionManager.Is_Mounted_By_Path(PartitionManager.Get_Android_Root_Path());
+ 	bool remount_vendor = PartitionManager.Is_Mounted_By_Path("/vendor");
++    bool remount_product = PartitionManager.Is_Mounted_By_Path("/product");
++    bool remount_system_ext = PartitionManager.Is_Mounted_By_Path("/system_ext");
++    bool remount_mi_ext = PartitionManager.Is_Mounted_By_Path("/mi_ext");
+ 
+ 	operation_start("Toggle System Mount");
+ 	if (!PartitionManager.UnMount_By_Path(PartitionManager.Get_Android_Root_Path(), true)) {
+@@ -2492,6 +2495,48 @@ int GUIAction::mountsystemtoggle(std::string arg)
+ 		} else {
+ 			op_status = 1; // fail
+ 		}
++		Part = PartitionManager.Find_Partition_By_Path("/product");
++		if (Part) {
++			if (arg == "0") {
++				Part->Change_Mount_Read_Only(false);
++			} else {
++				Part->Change_Mount_Read_Only(true);
++			}
++			if (remount_product) {
++				Part->Mount(true);
++			}
++			op_status = 0; // success
++		} else {
++			op_status = 1; // fail
++		}
++		Part = PartitionManager.Find_Partition_By_Path("/system_ext");
++		if (Part) {
++			if (arg == "0") {
++				Part->Change_Mount_Read_Only(false);
++			} else {
++				Part->Change_Mount_Read_Only(true);
++			}
++			if (remount_system_ext) {
++				Part->Mount(true);
++			}
++			op_status = 0; // success
++		} else {
++			op_status = 1; // fail
++		}
++		Part = PartitionManager.Find_Partition_By_Path("/mi_ext");
++		if (Part) {
++			if (arg == "0") {
++				Part->Change_Mount_Read_Only(false);
++			} else {
++				Part->Change_Mount_Read_Only(true);
++			}
++			if (remount_mi_ext) {
++				Part->Mount(true);
++			}
++			op_status = 0; // success
++		} else {
++			op_status = 1; // fail
++		}
+ 	}
+ 
+ 	operation_end(op_status);
+@@ -2557,13 +2602,13 @@ int GUIAction::flashlight(std::string arg __unused)
+ 		
+ 		if (path_one.empty() && path_two.empty()) {
+ 			// maintainer not set flash paths
+-			if (TWFunc::Path_Exists("/sys/class/leds/flashlight/brightness")) {
++			if (TWFunc::Path_Exists("/sys/devices/virtual/torch/torch/torch_level")) {
+ 				// use flashlight for old devices
+-				path_one = "/sys/class/leds/flashlight";
++				path_one = "/sys/devices/virtual/torch/torch";
+ 			} else {
+ 				// use flashlight for new devices
+-				path_one = "/sys/class/leds/led:torch_0";
+-				path_two = "/sys/class/leds/led:switch_0";
++				path_one = "/sys/devices/virtual/torch/torch";
++				path_two = "/sys/devices/virtual/torch/torch";
+ 			}
+ 		} else if (path_one.empty() && !path_two.empty()) {
+ 			path_one = path_two;
+@@ -2571,18 +2616,18 @@ int GUIAction::flashlight(std::string arg __unused)
+ 		}
+ 		
+ 		if (!path_one.empty()) {
+-			bright_one = path_one + "/brightness";
+-			max_one = path_one + "/max_brightness";
++			bright_one = path_one + "/torch_level";
++			max_one = path_one + "/torch_level";
+ 			if (TWFunc::Path_Exists(max_one)) {
+ 				TWFunc::read_file(max_one, max_brt_one);
+ 			} else {
+-				max_brt_one = "1";
++				max_brt_one = "2";
+ 			}
+ 			if (TWFunc::Path_Exists(bright_one)) {
+ 				TWFunc::read_file(bright_one, fl_one_on);
+ 				// If we use flashlight first time after reboot, always enable it
+ 				if (fl_one_on == "0" || fl_used == "0") {
+-					TWFunc::write_to_file(bright_one, max_brt_one);
++					TWFunc::write_to_file(bright_one, "2");
+           DataManager::SetValue("of_flash_on", "1");
+ 				} else {
+ 					TWFunc::write_to_file(bright_one, "0");
+@@ -2595,17 +2640,17 @@ int GUIAction::flashlight(std::string arg __unused)
+ 		}
+ 		
+ 		if (!path_two.empty()) {
+-			bright_two = path_two + "/brightness";
+-			max_two = path_two + "/max_brightness";
++			bright_two = path_two + "/torch_level";
++			max_two = path_two + "/torch_level";
+ 			if (TWFunc::Path_Exists(bright_two)) {
+ 				if (!TWFunc::Path_Exists(max_two)) {
+-					max_brt_two = "1";
++					max_brt_two = "2";
+ 				} else {
+ 					TWFunc::read_file(max_two, max_brt_two);
+ 				}
+ 				TWFunc::read_file(bright_two, fl_two_on);
+ 				if ((fl_two_on == "0" && fl_one_on == "0") || fl_used == "0") {
+-					TWFunc::write_to_file(bright_two, max_brt_two);
++					TWFunc::write_to_file(bright_two, "2");
+           DataManager::SetValue("of_flash_on", "1");
+ 				} else {
+ 					TWFunc::write_to_file(bright_two, "0");
