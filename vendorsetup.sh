@@ -8,7 +8,8 @@ export OF_NO_TREBLE_COMPATIBILITY_CHECK=1
 export OF_MAINTAINER="Kychera22"
 export FOX_VARIANT="A13+"
 export OF_FLASHLIGHT_ENABLE=1
-export OF_FL_PATH1="/sys/devices/virtual/torch/torch"
+#export OF_FL_PATH1="/sys/devices/virtual/torch/torch"
+#export OF_FL_PATH2="/sys/devices/virtual/torch/torch"
 export OF_NO_REFLASH_CURRENT_ORANGEFOX=1
 
 export FOX_RECOVERY_SYSTEM_PARTITION="/dev/block/mapper/system"
@@ -16,18 +17,18 @@ export FOX_RECOVERY_VENDOR_PARTITION="/dev/block/mapper/vendor"
 export FOX_VENDOR_BOOT_RECOVERY=1
 
 export FOX_USE_BASH_SHELL=1
-export FOX_USE_NANO_EDITOR=1
+#export FOX_USE_NANO_EDITOR=0
 export FOX_USE_TAR_BINARY=1
 export FOX_USE_SED_BINARY=1
 export FOX_USE_XZ_UTILS=1
 export FOX_ASH_IS_BASH=1
 export OF_ENABLE_LPTOOLS=1
-export FOX_DELETE_MAGISK_ADDON=1
+#export FOX_DELETE_MAGISK_ADDON=1
 export FOX_DELETE_AROMAFM=1
 export FOX_ENABLE_APP_MANAGER=1
 export FOX_RESET_SETTINGS=1
 export OF_SUPPORT_VBMETA_AVB2_PATCHING=1
-export OF_OPTIONS_LIST_NUM=11
+export OF_OPTIONS_LIST_NUM=9
 
 export FOX_INSTALLER_DEBUG_MODE=1
 

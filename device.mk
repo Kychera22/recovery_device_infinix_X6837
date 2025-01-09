@@ -28,11 +28,12 @@ ENABLE_VIRTUAL_AB := true
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)
 
 PRODUCT_PACKAGES += \
-    otapreopt_script \
-    cppreopts.sh \
-    update_engine \
-    update_verifier \
-    update_engine_sideload
+   update_engine_sideload \
+   otapreopt_script \
+   cppreopts.sh \
+   update_engine \
+   update_verifier \
+
 
 # Boot control HAL
 PRODUCT_PACKAGES += \
@@ -45,7 +46,8 @@ PRODUCT_PACKAGES += \
     libmtk_bsg
 
 PRODUCT_PACKAGES_DEBUG += \
-    bootctrl
+    bootctrl \
+    update_engine_client
 
 # Health HAL
 PRODUCT_PACKAGES += \
@@ -75,8 +77,28 @@ AB_OTA_PARTITIONS += \
     boot \
     vbmeta_vendor \
     vbmeta_system \
-    vendor_boot
-
+    vendor_boot \
+    dpm \
+    dbto \
+    gz \
+    lk \
+    logo \
+    mcupm \
+    md1img \
+    pi_img \
+    preloader_raw \
+    scp \
+    spmfw \
+    sspm \
+    tee \
+    tkv \
+    tr_carrier \
+    tr_compamy \
+    tr_mi \
+    tr_preload \
+    tr_product \
+    tr_region \
+    tr_theme
 
 TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
     $(TARGET_OUT_SHARED_LIBRARIES)/android.hardware.vibrator-V1-ndk_platform.so
